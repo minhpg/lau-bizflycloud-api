@@ -1,0 +1,16 @@
+{
+  "name": "lau-bizfly-api",
+  "version": "1.0.0",
+  "description": "bizfly cloud api",
+  "main": "index.js",
+  "scripts": {
+    "start" : "node .",
+    "dev" : "nodemon ."
+  },
+  "author": "minhpg",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "got": "^11.8.2"
+  }
+}
