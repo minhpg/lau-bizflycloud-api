@@ -2,11 +2,7 @@ const Auth = require("./auth");
 const Endpoint = require("./base");
 require("dotenv").config();
 
-class Header {
-  constructor(token, email) {
-    (this["X-Auth-Token"] = token), (this["X-Tenant-Name"] = email);
-  }
-}
+
 
 class Server {
   constructor(
@@ -37,44 +33,38 @@ class Server {
 }
 
 const GetInstancesFlavors = () => {
-  return Auth().then((response) => {
-    const headers = new Header(response.token, process.env.EMAIL);
+  return Auth().then((headers) => {
     return Endpoint("iaas-cloud/api/flavors", headers);
   });
 };
 
 const GetOSImages = () => {
-  return Auth().then((response) => {
-    const headers = new Header(response.token, process.env.EMAIL);
+  return Auth().then(headers => {
     return Endpoint("iaas-cloud/api/os-images", headers);
   });
 };
 
 const GetServers = () => {
-  return Auth().then((response) => {
-    const headers = new Header(response.token, process.env.EMAIL);
+  return Auth().then((headers) => {
     return Endpoint("iaas-cloud/api/servers", headers);
   });
 };
 
 const CreateServer = (name) => {
-  return Auth().then((response) => {
-    const headers = new Header(response.token, process.env.EMAIL);
+  return Auth().then((headers) => {
     const body = new Server(name);
     return Endpoint("iaas-cloud/api/servers", headers, [body]);
   });
 };
 
 const RetrieveServer = (id) => {
-  return Auth().then((response) => {
-    const headers = new Header(response.token, process.env.EMAIL);
+  return Auth().then((headers) => {
     return Endpoint(`iaas-cloud/api/servers/${id}`, headers);
   });
 };
 
 const DestroyServer = (id) => {
-  return Auth().then((response) => {
-    const headers = new Header(response.token, process.env.EMAIL);
+  return Auth().then((headers) => {
     return Endpoint(`iaas-cloud/api/servers/${id}`, headers, null, "DELETE");
   });
 };
